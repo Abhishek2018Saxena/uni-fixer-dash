@@ -66,6 +66,15 @@ export default function Index() {
         </div>
       </header>
 
+      {/* Hero Tagline */}
+      <div className="bg-gradient-to-r from-primary/10 to-primary/5 border-b border-border">
+        <div className="container max-w-7xl mx-auto px-4 py-6">
+          <p className="text-center text-lg md:text-xl text-muted-foreground font-medium">
+            Empowering students to report and track campus issues in real time
+          </p>
+        </div>
+      </div>
+
       <main className="container max-w-7xl mx-auto px-4 py-6 space-y-6">
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
