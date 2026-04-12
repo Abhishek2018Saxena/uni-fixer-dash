@@ -9,7 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Plus, Search, BarChart3, LayoutGrid, AlertCircle, CheckCircle2, Clock } from "lucide-react";
+import { Plus, Search, BarChart3, LayoutGrid, AlertCircle, CheckCircle2, Clock, PieChart } from "lucide-react";
+import { PieChart as RePieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
 export default function Index() {
   const issues = useIssueStore((s) => s.issues);
