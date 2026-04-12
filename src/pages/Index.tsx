@@ -9,7 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Plus, Search, BarChart3, LayoutGrid, AlertCircle, CheckCircle2, Clock } from "lucide-react";
+import { Plus, Search, BarChart3, LayoutGrid, AlertCircle, CheckCircle2, Clock, PieChart } from "lucide-react";
+import { PieChart as RePieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
 export default function Index() {
   const issues = useIssueStore((s) => s.issues);
@@ -82,6 +83,60 @@ export default function Index() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Insights Dashboard */}
+        <div className="bg-card rounded-xl border border-border p-6 space-y-4">
+          <div className="flex items-center gap-2">
+            <PieChart className="w-5 h-5 text-primary" />
+            <h2 className="font-display text-lg font-semibold text-foreground">Issue Insights Dashboard</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            {/* Stats */}
+            <div className="space-y-3">
+              <div className="bg-muted rounded-lg p-4">
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">Total Issues</p>
+                <p className="text-3xl font-display font-bold text-foreground">{stats.total}</p>
+              </div>
+              <div className="bg-muted rounded-lg p-4">
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">% Resolved</p>
+                <p className="text-3xl font-display font-bold text-success">
+                  {stats.total > 0 ? Math.round((stats.resolved / stats.total) * 100) : 0}%
+                </p>
+              </div>
+            </div>
+            
+            {/* Simple Pie Chart */}
+            <div className="md:col-span-2 h-48">
+              <ResponsiveContainer width="100%" height="100%">
+                <RePieChart>
+                  <Pie
+                    data={[
+                      { name: "Reported", value: stats.reported, color: "hsl(var(--destructive))" },
+                      { name: "In Progress", value: stats.inProgress, color: "hsl(var(--warning))" },
+                      { name: "Resolved", value: stats.resolved, color: "hsl(var(--success))" },
+                    ].filter(d => d.value > 0)}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={40}
+                    outerRadius={70}
+                    paddingAngle={2}
+                    dataKey="value"
+                  >
+                    {[
+                      { name: "Reported", value: stats.reported, color: "hsl(var(--destructive))" },
+                      { name: "In Progress", value: stats.inProgress, color: "hsl(var(--warning))" },
+                      { name: "Resolved", value: stats.resolved, color: "hsl(var(--success))" },
+                    ].filter(d => d.value > 0).map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </RePieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
         </div>
 
         <Tabs defaultValue="dashboard" className="space-y-4">
