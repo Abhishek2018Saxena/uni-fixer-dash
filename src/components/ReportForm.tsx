@@ -41,7 +41,10 @@ export function ReportForm({ onSuccess }: { onSuccess?: () => void }) {
       imageUrl: imagePreview || "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop",
     });
 
-    toast.success("Issue reported successfully! 🎉");
+    toast.success(`Issue reported successfully! "${type}" has been submitted. 🎉`, {
+      description: "Your report helps improve campus facilities. Track it in the dashboard below.",
+      duration: 4000,
+    });
     setType("");
     setBlock("");
     setFloor("");
