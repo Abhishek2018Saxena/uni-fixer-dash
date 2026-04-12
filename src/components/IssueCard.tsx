@@ -66,16 +66,19 @@ export function IssueCard({ issue }: { issue: Issue }) {
             <span>{issue.upvotes}</span>
           </button>
 
-          <Select value={issue.status} onValueChange={(v) => updateStatus(issue.id, v as IssueStatus)}>
-            <SelectTrigger className="w-[130px] h-8 text-xs">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {STATUSES.map((s) => (
-                <SelectItem key={s} value={s}>{s}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="flex flex-col gap-1">
+            <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Update Status (Admin)</span>
+            <Select value={issue.status} onValueChange={(v) => updateStatus(issue.id, v as IssueStatus)}>
+              <SelectTrigger className="w-[140px] h-8 text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {STATUSES.map((s) => (
+                  <SelectItem key={s} value={s}>{s}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
     </div>
